@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon --watch 'src/**/*.ts' --exec ts-node 'src/index.ts'",
+    "dev": "SET NODE_ENV=development&nodemon --watch src/*/.ts --exec ts-node src/index.ts",
     "build": "tsc",
-    "start": "NODE_ENV=development node build/index.js",
-    "test": "NODE_ENV=test jest --forceExit --verbose --runInBand"
+    "start": "SET NODE_ENV=development & node build/index.js",
+    "test": "SET NODE_ENV=test & jest --forceExit --verbose --runInBand"
   },
   "jest": {
     "roots": [
