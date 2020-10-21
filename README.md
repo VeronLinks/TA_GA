@@ -1,5 +1,5 @@
 # TA_GA
-The goal is developing two projects:
+The goal is developing two projects: 
 
 Project 1. Client or player
 Project 2. Server or game
