@@ -1,0 +1,5 @@
+Modelo => clase que representa nuestros recursos (similar al concepto representacion)
+Repositorio => operaciones de base de datos
+Servicios => lógica de negocio (independiente del medio en el que se use)
+Controladores => obtener datos del medio
+API.TS => definición de recursos, verbos y llamadas a los controller
