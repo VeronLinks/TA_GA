@@ -21,3 +21,5 @@ Something to think about:
 
 There can be simultaneous players playing at the same time.
 Our server is stateless (you don't have sessions on the server).
+
+Chue estuvo aqui
