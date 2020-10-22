@@ -4,7 +4,7 @@ const req = require("request");
 const read = require("readline");
 
 var actions = [
-    "Bebi mucho loco no me acuerdo", "Me folle a un travesti" ,"Me pote en la mascarilla"
+    "Bebi mucho loco no me acuerdo", "Tuve un accidente" ,"Me pote en la mascarilla"
     //Aqui se supone que hacemos una request de las opciones almacenadas en la dataBase, 
     //cada turno hace un print de 3 acciones (string) y van cambiando segun el stage (int)
 ];
