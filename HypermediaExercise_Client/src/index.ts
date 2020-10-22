@@ -20,7 +20,7 @@ const readLines = read.createInterface({
 
   function selectAction(action)
   {
-
+    //HERE we are doing the request to the server to send us the next stage with its options, basically the journey continues
   }
 
   function readAnswer(answer)
