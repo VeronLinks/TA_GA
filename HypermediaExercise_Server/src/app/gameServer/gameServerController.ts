@@ -48,7 +48,7 @@ export class GameController
      * @param next 
      */
     startGame(req, res, next) {
-        res.send(new Game(0,this.stages[0]));
+        res.send(new Game(this.stages[0],"WHERE AM I?"));
     }
 
     /**
@@ -63,13 +63,13 @@ export class GameController
 
     nextStage(req, res, next) {
         if(req.params.id && req.body){
-            res.send(this.goToNextStage(1));
+            //res.send(this.goToNextStage());
         }
      }
 
-     goToNextStage(id)
+     goToNextStage(id,option)
      {
-
+        
      }
 
 
