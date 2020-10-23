@@ -27,6 +27,19 @@ export class GameController
 
             new Stage(9,"Un monton de chats sin leer",["AAMama","Ella","El cremas", "Casero cabron"],[10,11,12,13]),
 
+            new Stage(10,"'-Mañana no voy a comer'\n'-Ok'",["Sales del chat"],[9]),
+
+            new Stage(11,"Un audio de 20 minutos y al final pone: 'Adios'",["Lloras y sales del chat"],[9]),
+
+            new Stage(12,"La que liaste ayer bro, te dejaste las llaves y los calzoncillos. Pero te llevaste mi mascarilla de la basura",["Por eso hay pota en mi mascarilla. Voy a buscar las llaves"
+            ],[14]),
+
+            new Stage(13,"'¿Por qué rompiste la ventana para entrar en casa?'",["Sales de la aplicacion sin contestar"],[15]),
+
+            new Stage(14,"Me visto y salgo de casa",[],[]), //you won, has recuperado las llaves
+
+            new Stage(15,"Me he quedado sin llaves y sin ventana, perdí",[],[]) //you lost
+
             
 
 
