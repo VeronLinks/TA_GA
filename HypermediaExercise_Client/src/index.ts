@@ -1,9 +1,11 @@
 import { Console } from "console";
+import { parse } from 'path';
 
 const req = require("request");
 const read = require("readline");
 
 var actions = [];
+var game;
 
 const readLines = read.createInterface({
     input: process.stdin,
@@ -12,25 +14,51 @@ const readLines = read.createInterface({
 
 
   var apiLocation = "localhost:8080/api";
-  req(apiLocation + "/game",)
+  req(apiLocation, catchResponse);
 
+  readLines.on('line',)
 
-  // console.log("-Oh its seems like you were wasted last night, let's try to remeber where did you lose your keys.");
-  // console.log("-What is the last thing you remember?");
-  // printActions();
-
-  function selectAction(action)
+  function processAction(action)
   {
     //HERE we are doing the request to the server to send us the next stage with its options, basically the journey continues
+    if(action)
+    {
+      switch(action.trim())
+      {
+        case 'wtf':
+          break;
+        default:
+          // try
+          // {
+            var answer = parseInt(action);
+            if(answer < actions.length && answer >= 0)
+            {
+              reqOption(action);
+            }
+          // }
+          // catch(err)
+          // {
+
+          // }
+          
+      }
+    }
   }
 
   function readAnswer(answer)
   {
     var action = parseInt(answer);
-    if(action < actions.length && action >= 0)
-    {
-      selectAction(action);
-    }
+    
+  }
+
+  function reqOption(option)
+  {
+    req.post(apiLocation+"/stages/");
+  }
+
+  function catchResponse(error, response, body)
+  {
+    //game = ;
   }
 
   function printActions(){
