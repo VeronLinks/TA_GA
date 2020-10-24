@@ -1,8 +1,8 @@
 import {Game} from './gameServerModel'
 import {Stage} from '../stage/stageModel'
+
 export class GameController
 {
-
     stages : Stage[];
 
     constructor(){
@@ -52,7 +52,7 @@ export class GameController
     }
 
     /**
-     * @api GET /start
+     * @api GET 
      * 
      * This method creates a new game
      * 
@@ -65,7 +65,7 @@ export class GameController
     }
 
     /**
-     * @api POST /room/:id/forward
+     * @api POST 
      * 
      * This method tries to apply an action in the game provided
      * 
@@ -75,15 +75,24 @@ export class GameController
      */
 
     nextStage(req, res, next) {
-        if(req.params.id && req.body){
-            //res.send(this.goToNextStage());
+        if(req.params.id){
+            res.send(this.goToNextStage(req.params.id,this.stages[req.params.id].nextStages[req.params.id])); //checkiar
         }
      }
 
      goToNextStage(id,option)
      {
-        
+        var i = this.stages[id].options.indexOf(option);
+        if(i>=0)
+        {
+            return new Game(this.stages[this.stages[id].nextStages[i]],"puta madre avanzaste")
+        }
+        else{
+            return new Game(this.stages[id],"Lol")
+        }
      }
+
+
 
 
 }

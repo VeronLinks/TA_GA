@@ -3,20 +3,21 @@ import { Console } from "console";
 const req = require("request");
 const read = require("readline");
 
-var actions = [
-    "Bebi mucho loco no me acuerdo", "Tuve un accidente" ,"Me pote en la mascarilla"
-    //Aqui se supone que hacemos una request de las opciones almacenadas en la dataBase, 
-    //cada turno hace un print de 3 acciones (string) y van cambiando segun el stage (int)
-];
+var actions = [];
 
 const readLines = read.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
 
-  console.log("-Oh its seems like you were wasted last night, let's try to remeber where did you lose your keys.");
-  console.log("-What is the last thing you remember?");
-  printActions();
+
+  var apiLocation = "localhost:8080/api";
+  req(apiLocation + "/game",)
+
+
+  // console.log("-Oh its seems like you were wasted last night, let's try to remeber where did you lose your keys.");
+  // console.log("-What is the last thing you remember?");
+  // printActions();
 
   function selectAction(action)
   {

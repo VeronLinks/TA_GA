@@ -1,14 +1,13 @@
 import { Router } from 'express';
 import { Service } from 'typedi';
-import { CompanyController } from '../../app/companies/company.controller';
-import { CompanyTypeController } from '../../app/company-types/company-type.controller';
+import { GameController } from '../../app/gameServer/gameServercontroller';
+
 
 @Service()
 export class Api {
   private apiRouter: Router;
 
-  constructor(private companyController: CompanyController,
-              private companyTypeController: CompanyTypeController,
+  constructor(private gameController : GameController
   ) {
     this.initRouterAndSetApiRoutes();
   }
@@ -20,38 +19,16 @@ export class Api {
   private initRouterAndSetApiRoutes(): void {
     this.apiRouter = Router();
 
-    //setRoutes
-    //COMPANY TYPES 
+    //Start game //GET
     this.apiRouter.get(
-      '/company_types',
-      (req, res, next) => this.companyTypeController.getAll(req, res, next)
+      '/start_Game',
+      (req, res, next) => this.gameController.startGame(req, res, next)
     );
 
-
-    //COMPANIES
-    this.apiRouter.post(
-      '/companies',
-      (req, res, next) => this.companyController.create(req, res, next)
-    );
-
-    this.apiRouter.get(
-      '/companies',
-      (req, res, next) => this.companyController.getAll(req, res, next)
-    );
-
-    this.apiRouter.get(
-      '/companies/:id',
-      (req, res, next) => this.companyController.getById(req, res, next)
-    );
-
+    //Go next stage //PUT
     this.apiRouter.put(
-      '/companies/:id',
-      (req, res, next) => this.companyController.update(req, res, next)
-    );
-
-    this.apiRouter.delete(
-      '/companies/:id',
-      (req, res, next) => this.companyController.delete(req, res, next)
+      '/update_Game',
+      (req, res, next) => this.gameController.nextStage(req, res, next)
     );
 
   }
