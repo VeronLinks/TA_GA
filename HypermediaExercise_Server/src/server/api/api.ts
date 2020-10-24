@@ -19,16 +19,16 @@ export class Api {
   private initRouterAndSetApiRoutes(): void {
     this.apiRouter = Router();
 
-    // Get State
-    this.apiRouter.get(
+    // Next State
+    this.apiRouter.put(
       '/stages/:id',
-      (req, res, next) => this.stageController.getById(req, res, next)
+      (req, res, next) => this.stageController.update(req, res, next)
     );
 
     // Start Game
-    this.apiRouter.put(
+    this.apiRouter.get(
       '/stages',
-      (req, res, next) => this.stageController.update(req, res, next)
+      (req, res, next) => this.stageController.getFirst(req, res, next)
     );
   }
 }

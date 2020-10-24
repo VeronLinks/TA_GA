@@ -11,7 +11,7 @@ export class StageController {
   }
 
  /**
-   * @api PUT /stages/
+   * @api PUT /stages/:id
    * 
    * @param req 
    * @param res 
@@ -22,9 +22,9 @@ export class StageController {
       const stage = req.body;
       stage.id = req.params.id;
 
-      this.stageService.update()
-        .then((firstStage:Stage) => {
-          res.send(firstStage);
+      this.stageService.update(req.params.id)
+        .then((stage:Stage | null) => {
+          res.send(stage);
         })
         .catch((error:Error) => {
           res.sendStatus(500);
@@ -33,17 +33,17 @@ export class StageController {
   }
 
   /**
-   * @api GET /stages/:id
+   * @api GET /stages/
    * 
    * @param req 
    * @param res 
    * @param next 
    */
-  getById(req, res, next) {
+  getFirst(req, res, next) {
     if (req.params.id) {
-      this.stageService.findById(req.params.id)
-        .then((stage:Stage | null) => {
-          res.send(stage);
+      this.stageService.find()
+        .then((firstStage:Stage) => {
+          res.send(firstStage);
         })
         .catch((error:Error) => {
           res.sendStatus(500);

@@ -13,8 +13,11 @@ const readLines = read.createInterface({
     output: process.stdout,
   });
 
-  var apiLocation = "localhost:8080/api";
-  req.put(apiLocation, catchResponse);
+  var apiLocation = "http://localhost:8080/api";
+
+  console.log("eee antes");
+  req(apiLocation + "/stages", catchResponse);
+  console.log("eee después");
 
   readLines.on('line', processAction);
 
@@ -52,19 +55,34 @@ const readLines = read.createInterface({
 
   function reqOptions(option)
   {
-    req.get(apiLocation + "/stages/" + actions[option], catchResponse);
+    req.put(apiLocation + "/stages/" + actions[option], catchResponse);
   }
 
   function catchResponse(error, response, body)
   {
-    var stage = JSON.parse(body);
-    
-    text = stage.text;
-    actionsText = stage.options;
-    actions = stage.nextStages;
+    console.log("eee");
+    if (response.statusCode == 200)
+    {
+      console.log("eee bien");
+      console.log(body);
 
-    console.log(text + "\n");
-    printActions();
+      var stage = JSON.parse(body);
+      
+      console.log(stage);
+
+      text = stage.text;
+      actionsText = stage.options;
+      actions = stage.nextStages;
+  
+      console.log(text + "\n");
+
+      printActions();
+    }
+    else
+    {
+      console.log("eee mal");
+      console.log("FAILURE: " + response.statusCode + ": " + error + "\n");
+    }
   }
 
   function printActions(){

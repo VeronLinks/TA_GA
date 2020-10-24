@@ -49,21 +49,20 @@ export class StageRepository {
   }
 
   // Update for starting the game
-  async update(): Promise<Stage> {
+  async update(stageId: number): Promise<Stage | null>
+  {
+
+    return this.stages[stageId] || null;
+    
+  }
+
+  // Find for going to a stage
+  async find(): Promise<Stage> 
+  {
     if (this.stages == null || this.stages.length == 0)
     {
       this.createStages();
     }
     return this.stages[0];
-  }
-
-  // Find for going to a stage
-  async findById(stageId: number): Promise<Stage | null> 
-  {
-    // if (this.stages == null || this.stages.length == 0)
-    // {
-    //   this.createStages();
-    // }
-    return this.stages[stageId] || null;
   }
 }

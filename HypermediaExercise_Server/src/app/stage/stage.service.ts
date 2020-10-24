@@ -9,17 +9,19 @@ export class StageService {
 
   constructor(private readonly stageRepository: StageRepository) { }
 
-  async update(): Promise<Stage> {
-    return await this.stageRepository.update();
-  }
-
-  async findById(stageId: number): Promise<Stage | null> {
+  async update(stageId: number): Promise<Stage | null> 
+  {
     if (!this.isValidId(stageId)) {
       return Promise.reject(new Error('InvalidStageIdError'));
     }
-
-    return await this.stageRepository.findById(stageId);
+    return await this.stageRepository.update(stageId);
   }
+
+  async find(): Promise<Stage> 
+  {
+    return await this.stageRepository.find();
+  }
+
   private isValidId(stageId: any): boolean {
     return stageId != null && isNumber(toNumber(stageId));
   }
