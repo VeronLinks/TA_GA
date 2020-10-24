@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import { Service } from 'typedi';
-import { GameController } from '../../app/gameServer/gameServercontroller';
+import { StageController } from '../../app/stage/stage.controller';
 
 
 @Service()
 export class Api {
   private apiRouter: Router;
 
-  constructor(private gameController : GameController
+  constructor(private stageController : StageController
   ) {
     this.initRouterAndSetApiRoutes();
   }
@@ -19,18 +19,16 @@ export class Api {
   private initRouterAndSetApiRoutes(): void {
     this.apiRouter = Router();
 
-    //Start game //GET
+    // Get State
     this.apiRouter.get(
-      '/start_Game',
-      (req, res, next) => this.gameController.startGame(req, res, next)
+      '/stages/:id',
+      (req, res, next) => this.stageController.getById(req, res, next)
     );
 
-    //Go next stage //PUT
+    // Start Game
     this.apiRouter.put(
-      '/update_Game',
-      (req, res, next) => this.gameController.nextStage(req, res, next)
+      '/stages',
+      (req, res, next) => this.stageController.update(req, res, next)
     );
-
   }
-
 }
