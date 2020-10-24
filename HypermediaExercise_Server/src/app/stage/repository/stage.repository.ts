@@ -60,10 +60,10 @@ export class StageRepository {
   // Find for going to a stage
   async findById(stageId: number): Promise<Stage | null> 
   {
-    if (this.stages == null || this.stages.length == 0)
-    {
-      this.createStages();
-    }
+    // if (this.stages == null || this.stages.length == 0)
+    // {
+    //   this.createStages();
+    // }
     return this.stages[stageId] || null;
   }
 }
