@@ -1,6 +1,3 @@
-import { json } from 'express';
-import { parse } from 'path';
-
 const req = require("request");
 const read = require("readline");
 
@@ -15,9 +12,7 @@ const readLines = read.createInterface({
 
   var apiLocation = "http://localhost:8080/api";
 
-  console.log("eee antes");
-  req(apiLocation + "/stages", catchResponse);
-  console.log("eee después");
+  req.get(apiLocation + "/stages", catchResponse);
 
   readLines.on('line', processAction);
 
@@ -29,11 +24,12 @@ const readLines = read.createInterface({
       switch(action.trim())
       {
         case 'exit':
-          readLines.close();
+          closeLines();
+          break;
+        case 'start':
+          req.get(apiLocation + "/stages", catchResponse);
           break;
         default:
-          // try
-          // {
             var answer = parseInt(action);
             if(answer < actions.length && answer >= 0)
             {
@@ -41,54 +37,57 @@ const readLines = read.createInterface({
             }
             else
             {
-              console.log("That action is not valid. Choose one of the given ones.\n");
+              console.log("Esa acción no está entre las contempladas.");
             }
-          // }
-          // catch(err)
-          // {
-
-          // }
-          
+            break;
       }
     }
   }
 
   function reqOptions(option)
   {
+    console.log("\n");
     req.put(apiLocation + "/stages/" + actions[option], catchResponse);
   }
 
   function catchResponse(error, response, body)
   {
-    console.log("eee");
     if (response.statusCode == 200)
     {
-      console.log("eee bien");
-      console.log(body);
-
       var stage = JSON.parse(body);
-      
-      console.log(stage);
 
       text = stage.text;
       actionsText = stage.options;
       actions = stage.nextStages;
   
-      console.log(text + "\n");
+      console.log("\n" + text + "\n");
 
       printActions();
     }
     else
     {
-      console.log("eee mal");
       console.log("FAILURE: " + response.statusCode + ": " + error + "\n");
     }
   }
 
   function printActions(){
-    console.log("Select one action: \n");
-    for (let i = 0; i < actionsText.length; i++) {
-      const actionText = actionsText[i];
-      console.log(i + " : " + actionText);
+    if (actionsText.length > 0)
+    {
+      console.log("Elige una acción:");
+      for (let i = 0; i < actionsText.length; i++) {
+        const actionText = actionsText[i];
+        console.log(i + " : " + actionText);
+      }
     }
+    else
+    {
+      closeLines();
+    }
+  }
+
+  function closeLines()
+  {
+    console.log('¡Hasta la próxima!');
+    readLines.close();
+    process.exit(0);
   }
