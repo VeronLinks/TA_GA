@@ -31,7 +31,7 @@ export class StageRepository {
 
       new Stage(8,"Lloras",["Te pones triste, pero sales de la aplicacion"],[5]),
 
-      new Stage(9,"Un monton de chats sin leer",["AAMama","Ella","El cremas", "Casero cabron"],[10,11,12,13]),
+      new Stage(9,"Un monton de chats sin leer",["AAMama","Ella","El cremas", "Casero"],[10,11,12,13]),
 
       new Stage(10,"'-Mañana no voy a comer'\n'-Ok'",["Sales del chat"],[9]),
 
@@ -58,7 +58,12 @@ export class StageRepository {
   }
 
   // Find for going to a stage
-  async findById(stageId: number): Promise<Stage | null> {
+  async findById(stageId: number): Promise<Stage | null> 
+  {
+    if (this.stages == null || this.stages.length == 0)
+    {
+      this.createStages();
+    }
     return this.stages[stageId] || null;
   }
 }
