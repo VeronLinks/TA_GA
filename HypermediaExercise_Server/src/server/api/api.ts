@@ -39,7 +39,7 @@ export class Api {
 
 
     // Start Game
-    this.apiRouter.getFirst(
+    this.apiRouter.get(
       '/stages',
       (req, res, next) => this.stageController.getFirst(req, res, next)
     );
