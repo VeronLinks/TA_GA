@@ -24,9 +24,22 @@ export class Api {
       '/stages/:id',
       (req, res, next) => this.stageController.update(req, res, next)
     );
+    this.apiRouter.post(
+      '/stages/:id',
+      (req, res, next) => this.stageController.create(req, res, next)
+    );
+    this.apiRouter.get(
+      '/stages/:id',
+      (req, res, next) => this.stageController.findById(req, res, next)
+    );
+    this.apiRouter.delete(
+      '/stages/:id',
+      (req, res, next) => this.stageController.delete(req, res, next)
+    );
+
 
     // Start Game
-    this.apiRouter.get(
+    this.apiRouter.getFirst(
       '/stages',
       (req, res, next) => this.stageController.getFirst(req, res, next)
     );

@@ -4,6 +4,8 @@ const read = require("readline");
 var text;
 var actionsText = [];
 var actions = [];
+var requestType;
+var currentURL;
 
 const readLines = read.createInterface({
     input: process.stdin,
@@ -47,7 +49,22 @@ const readLines = read.createInterface({
   function reqOptions(option)
   {
     console.log("\n");
-    req.put(apiLocation + "/stages/" + actions[option], catchResponse);
+    switch(requestType)
+    {
+      case 'PUT':
+        req.put(currentURL + actions[option], catchResponse);
+        break;
+      case 'POST':
+        req.post(currentURL +actions[option], catchResponse);
+        break;
+      case 'GET':
+        req.get(currentURL + actions[option], catchResponse);
+        break;
+      case 'DELETE':
+        req.delete(currentURL + actions[option], catchResponse);
+        break;
+    }
+    
   }
 
   function catchResponse(error, response, body)
@@ -59,6 +76,8 @@ const readLines = read.createInterface({
       text = stage.text;
       actionsText = stage.options;
       actions = stage.nextStages;
+      requestType = stage.request;
+      currentURL = stage.url;
   
       console.log("\n" + text + "\n");
 

@@ -16,6 +16,27 @@ export class StageService {
     }
     return await this.stageRepository.update(stageId);
   }
+  async findById(stageId: number): Promise<Stage | null> 
+  {
+    if (!this.isValidId(stageId)) {
+      return Promise.reject(new Error('InvalidStageIdError'));
+    }
+    return await this.stageRepository.update(stageId);
+  }
+  async create(stageId: number): Promise<Stage | null> 
+  {
+    if (!this.isValidId(stageId)) {
+      return Promise.reject(new Error('InvalidStageIdError'));
+    }
+    return await this.stageRepository.update(stageId);
+  }
+  async delete(stageId: number): Promise<Stage | null> 
+  {
+    if (!this.isValidId(stageId)) {
+      return Promise.reject(new Error('InvalidStageIdError'));
+    }
+    return await this.stageRepository.update(stageId);
+  }
 
   async find(): Promise<Stage> 
   {
